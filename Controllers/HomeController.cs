@@ -25,7 +25,7 @@ namespace CzytnikRSS.Controllers
                         description = item.Element("description").Value,
                         pubDate = DateTime.Now
                     };
-                    dbController.ZapiszDoBazy(site);
+                    dbController.ZapiszStroneDoBazy(site);
                 }
 
             return View();

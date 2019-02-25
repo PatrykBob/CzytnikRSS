@@ -11,7 +11,7 @@ namespace CzytnikRSS.Controllers
     public class DatabaseController : Controller
     {
         // GET: Database
-        public void ZapiszDoBazy(Site site)
+        public void ZapiszStroneDoBazy(Site site)
         {
             using (var db = new LiteDatabase(@"D:\dane.db"))
             {
