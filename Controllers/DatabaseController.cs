@@ -13,7 +13,9 @@ namespace CzytnikRSS.Controllers
         // GET: Database
         public void ZapiszStroneDoBazy(Site site)
         {
-            using (var db = new LiteDatabase(@"D:\dane.db"))
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).ToString();
+            path += "/dane.db";
+            using (var db = new LiteDatabase(path))
             {
                 var col = db.GetCollection<Site>("sites");
 
