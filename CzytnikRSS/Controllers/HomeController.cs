@@ -20,6 +20,13 @@ namespace CzytnikRSS.Controllers
 
             PobierzLinkiStron();
 
+            List<Source> linki = dbController.PobierzLinkiZBazy();
+
+            foreach (Source link in linki)
+            {
+                PobierzElementyZeStrony(link.link);
+            }
+
             return View();
         }
 
@@ -34,11 +41,10 @@ namespace CzytnikRSS.Controllers
                 HtmlDocument doc = new HtmlDocument();
                 doc.LoadHtml(html);
                 List<HtmlAttribute> lista = new List<HtmlAttribute>();
-                foreach(HtmlNode lin in doc.DocumentNode.SelectNodes("//a[@href]"))
+                foreach (HtmlNode lin in doc.DocumentNode.SelectNodes("//a[@href]"))
                 {
-                    //HtmlAttribute href = link.Attributes["href"];
                     HtmlAttribute rel = lin.Attributes["rel"];
-                    HtmlAttribute id = lin.Attributes["id"]; 
+                    HtmlAttribute id = lin.Attributes["id"];
                     if (rel != null && id == null)
                     {
                         if (lin.Attributes["rel"].Value == "nofollow")
@@ -55,19 +61,54 @@ namespace CzytnikRSS.Controllers
             }
         }
 
-        public void PobierzElementyZeStrony (string link)
+        public bool CzyStronaOnline(string link)
         {
-            XElement rss = XElement.Load(link);
-
-            foreach (var item in rss.Descendants("item"))
+            try
             {
-                var site = new Site
+                HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create(link);
+                httpReq.AllowAutoRedirect = false;
+
+                HttpWebResponse httpRes = (HttpWebResponse)httpReq.GetResponse();
+
+                if (httpRes.StatusCode == HttpStatusCode.NotFound)
                 {
-                    title = item.Element("title").Value,
-                    description = item.Element("description").Value,
-                    pubDate = DateTime.Now
-                };
-                dbController.ZapiszStroneDoBazy(site);
+                    return false;
+                }
+
+                // Close the response.
+                httpRes.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        public void PobierzElementyZeStrony(string link)
+        {
+            if (CzyStronaOnline(link))
+            {
+                try
+                {
+                    XElement rss = XElement.Load(link);
+                    foreach (var item in rss.Descendants("item"))
+                    {
+                        var site = new Site
+                        {
+                            title = item.Element("title").Value,
+                            description = item.Element("description").Value,
+                            pubDate = DateTime.Now,
+                            link = link
+                        };
+                        dbController.ZapiszStroneDoBazy(site);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
         }
 

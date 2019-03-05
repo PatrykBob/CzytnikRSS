@@ -20,6 +20,16 @@ namespace CzytnikRSS.Controllers
                 col.Insert(link);
             }
         }
+
+        public List<Source> PobierzLinkiZBazy()
+        {
+            using (var db = new LiteDatabase(path))
+            {
+                var col = db.GetCollection<Source>("links");
+
+                return col.FindAll().ToList();
+            }
+        }
         // GET: Database
         public void ZapiszStroneDoBazy(Site site)
         {
