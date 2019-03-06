@@ -17,7 +17,10 @@ namespace CzytnikRSS.Controllers
             {
                 var col = db.GetCollection<Source>("links");
 
-                col.Insert(link);
+                var exist = col.Exists(Query.EQ("link", link.link));
+
+                if (!exist)
+                    col.Insert(link);
             }
         }
 
@@ -37,7 +40,10 @@ namespace CzytnikRSS.Controllers
             {
                 var col = db.GetCollection<Site>("sites");
 
-                col.Insert(site);               
+                var exist = col.Exists(Query.EQ("title", site.title));
+
+                if(!exist)
+                    col.Insert(site);               
             }
         }
     }
