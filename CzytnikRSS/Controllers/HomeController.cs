@@ -27,7 +27,27 @@ namespace CzytnikRSS.Controllers
                 PobierzElementyZeStrony(link.link);
             }
 
-            return View();
+            //Pobieranie z bazy i wrzucanie do widoku/indexu
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).ToString() + "/dane.db";
+            using (var db = new LiteDatabase(path))
+            {
+                var col = db.GetCollection<Site>("sites");
+
+                var query = col.FindAll().Select(item =>
+                        new Site
+                        {
+                            title = item.title,
+                            description = item.description,
+                            pubDate = item.pubDate,
+                            link = item.link
+                        });
+                var items = query.ToList();
+
+                return View(items);
+            }
+
+
+            //return View();
         }
 
         public void PobierzLinkiStron()
@@ -114,7 +134,7 @@ namespace CzytnikRSS.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Your application page.";
 
             return View();
         }
@@ -125,5 +145,6 @@ namespace CzytnikRSS.Controllers
 
             return View();
         }
+
     }
 }
