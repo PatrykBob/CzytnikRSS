@@ -31,14 +31,12 @@ namespace CzytnikRSS.Controllers
             string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).ToString() + "/dane.db";
             using (var db = new LiteDatabase(path))
             {
-                var col = db.GetCollection<Site>("sites");
+                var col = db.GetCollection<Source>("links");
 
                 var query = col.FindAll().Select(item =>
-                        new Site
+                        new Source
                         {
-                            title = item.title,
-                            description = item.description,
-                            pubDate = item.pubDate,
+                            id = item.id,
                             link = item.link
                         });
                 var items = query.ToList();
@@ -71,7 +69,6 @@ namespace CzytnikRSS.Controllers
                         {
                             Source l = new Source()
                             {
-                                name = "test",
                                 link = lin.Attributes["href"].Value
                             };
                             dbController.ZapiszLinkDoBazy(l);
