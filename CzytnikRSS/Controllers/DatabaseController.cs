@@ -33,6 +33,16 @@ namespace CzytnikRSS.Controllers
                 return col.FindAll().ToList();
             }
         }
+
+        public List<Site> PobierzStronyWgLinku(string link)
+        {
+            using (var db = new LiteDatabase(path))
+            {
+                var col = db.GetCollection<Site>("sites");
+
+                return col.Find(Query.EQ("Link", link)).ToList();
+            }
+        }
         // GET: Database
         public void ZapiszStroneDoBazy(Site site)
         {

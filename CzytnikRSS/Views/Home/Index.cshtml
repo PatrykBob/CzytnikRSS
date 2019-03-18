@@ -1,4 +1,4 @@
-﻿@Model List<CzytnikRSS.Source>
+﻿@model List<CzytnikRSS.Models.Source>
 
 @{
 	ViewBag.Title = "Home Page";
@@ -7,16 +7,5 @@
 
 @foreach (var Strona in Model)
 {
-	<h1 id="@Strona.id" onclick="WyswietlWybrany(this.id)">@Strona.link</h1>
+	@Html.ActionLink(Strona.link, "PokazStrony", "Home", new { link = Strona.link}, null)
 }
-
-
-<script>
-
-    function WyswietlWybrany(id)
-    {
-        alert(id);
-    }
-
-
-</script>

@@ -48,6 +48,11 @@ namespace CzytnikRSS.Controllers
             //return View();
         }
 
+        public ActionResult PokazStrony(string link)
+        {
+            return (View(dbController.PobierzStronyWgLinku(link)));
+        }
+
         public void PobierzLinkiStron()
         {
             string link = "http://www.rss.lostsite.pl/index.php?rss=32";
