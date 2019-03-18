@@ -5,3 +5,21 @@
 
 <h2>PokazStrony</h2>
 
+
+@foreach (var Strona in Model)
+{
+<h3>
+    @Strona.title
+</h3>
+<h4>
+    @Strona.description
+</h4>
+<h5>
+    @Strona.pubDate
+</h5>
+}
+
+
+
+
+

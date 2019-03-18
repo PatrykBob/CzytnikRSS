@@ -40,7 +40,7 @@ namespace CzytnikRSS.Controllers
             {
                 var col = db.GetCollection<Site>("sites");
 
-                return col.Find(Query.EQ("Link", link)).ToList();
+                return col.Find(Query.EQ("link", link)).ToList();
             }
         }
         // GET: Database

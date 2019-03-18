@@ -1,11 +1,82 @@
 ﻿@model List<CzytnikRSS.Models.Source>
 
 @{
-	ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home Page";
 }
 
+<div class="main">
+    <div class="modal-title">
+        <h1 class="h1">Linki do stron RSS:</h1>
+    </div>
+    <hr class="hr" />
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var Strona in Model)
+            {
+                <div class="col-xs-6">
+                    <p class="text">
+                        @Html.ActionLink(Strona.link, "PokazStrony", "Home", new { link = Strona.link }, new { @class = "tekst" })
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
-@foreach (var Strona in Model)
-{
-	@Html.ActionLink(Strona.link, "PokazStrony", "Home", new { link = Strona.link}, null)
-}
+<style>
+
+    .main {
+        background-image: url('../../obrazki/background-08.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        height: 1000px;
+        padding-top: 40px;
+        padding-bottom: 0px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+
+    .tekst {
+        color: black;
+    }
+
+    .col-xs-6 {
+        font-size: 22px;
+        text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+    }
+
+    .modal-title {
+        text-align: center;
+    }
+
+    .h1 {
+        font-size: 36px;
+        color: rgba(0,0,0,0.6);
+        text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+    }
+
+    .row {
+        text-align: center;
+    }
+
+    .hr {
+        overflow: visible;
+        height: 30px;
+        border-style: solid;
+        border-color: white;
+        border-width: 1px 0 0 0;
+        border-radius: 20px;
+    }
+
+        .hr:before {
+            display: block;
+            content: "";
+            height: 30px;
+            margin-top: -31px;
+            border-style: solid;
+            border-color: white;
+            border-width: 0 0 1px 0;
+            border-radius: 20px;
+        }
+
+</style>
