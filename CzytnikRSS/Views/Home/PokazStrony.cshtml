@@ -7,16 +7,16 @@
     </div>
     <hr class="hr" />
 
-    @foreach (var Strona in Model)
+    @foreach (var item in Model)
     {
         <h3 class="h3">
-            @Strona.title
+            @item.title
         </h3>
         <h5 class="h5">
-            @Strona.pubDate
+            @item.pubDate
         </h5>
         <h4 class="h4">
-            @Html.Raw(Strona.description)
+            @Html.Raw(item.description)
         </h4>
         <hr />
     }

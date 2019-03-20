@@ -18,16 +18,14 @@ namespace Service
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
-    // Aby zezwalać na wywoływanie tej usługi sieci Web ze skryptu za pomocą kodu ASP.NET AJAX, usuń znaczniki komentarza z następującego wiersza. 
-    // [System.Web.Script.Services.ScriptService]
     public class WebService : System.Web.Services.WebService
     {
 
 
-        string path = "dane.db";//Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).ToString() + "/dane.db";
+        string path = "dane.db";
 
         [WebMethod]
-        public bool Odswiez()
+        public void Odswiez()
         {
             PobierzLinkiStron();
             List<Source> linki = PobierzLinkiZBazy();
@@ -35,7 +33,6 @@ namespace Service
             {
                 PobierzElementyZeStrony(link.link);
             }
-            return true;
         }
 
         public bool CzyStronaOnline(string link)
@@ -52,7 +49,6 @@ namespace Service
                     return false;
                 }
 
-                // Close the response.
                 httpRes.Close();
                 return true;
             }
@@ -103,8 +99,6 @@ namespace Service
         [WebMethod]
         public List<Source> PobierzLinkiZBazy()
         {
-            //Odswiez();
-            //PobierzLinkiStron();
             using (var db = new LiteDatabase(path))
             {
                 var col = db.GetCollection<Source>("links");
@@ -127,7 +121,7 @@ namespace Service
         {
             using (var db = new LiteDatabase(path))
             {
-                var col = db.GetCollection<RssItem>("sites");
+                var col = db.GetCollection<RssItem>("rssitems");
 
                 var exist = col.Exists(Query.EQ("title", RssItem.title));
 
