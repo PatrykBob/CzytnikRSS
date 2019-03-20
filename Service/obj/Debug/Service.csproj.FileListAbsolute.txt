@@ -120,3 +120,5 @@ D:\Users\patry\OneDrive - Akademia Techniczno-Humanistyczna\Visual\CzytnikRSS\Cz
 D:\Users\patry\OneDrive - Akademia Techniczno-Humanistyczna\Visual\CzytnikRSS\CzytnikRSS\Service\obj\Debug\Service.csproj.CopyComplete
 D:\Users\patry\OneDrive - Akademia Techniczno-Humanistyczna\Visual\CzytnikRSS\CzytnikRSS\Service\obj\Debug\Service.dll
 D:\Users\patry\OneDrive - Akademia Techniczno-Humanistyczna\Visual\CzytnikRSS\CzytnikRSS\Service\obj\Debug\Service.pdb
+D:\Users\patry\OneDrive - Akademia Techniczno-Humanistyczna\Visual\CzytnikRSS\CzytnikRSS\Service\obj\Debug\Service.WebService.resources
+D:\Users\patry\OneDrive - Akademia Techniczno-Humanistyczna\Visual\CzytnikRSS\CzytnikRSS\Service\obj\Debug\Service.csproj.GenerateResource.cache

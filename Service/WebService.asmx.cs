@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Web;
 using System.Web.Services;
 using System.Xml.Linq;
@@ -20,8 +21,6 @@ namespace Service
     [System.ComponentModel.ToolboxItem(false)]
     public class WebService : System.Web.Services.WebService
     {
-
-
         string path = "dane.db";
 
         [WebMethod]
@@ -72,7 +71,7 @@ namespace Service
                         {
                             title = item.Element("title").Value,
                             description = item.Element("description").Value,
-                            pubDate = DateTime.Now,
+                            pubDate = item.Element("pubDate").Value,
                             link = link
                         };
                         ZapiszStroneDoBazy(rssItem);
@@ -158,6 +157,18 @@ namespace Service
                     }
                 }
             }
+        }
+
+        protected static Timer timer;
+        public WebService()
+        {
+            if(timer == null)
+            timer = new Timer(MyRoutineToCall, null, TimeSpan.FromMinutes(0), TimeSpan.FromMinutes(15));
+        }
+
+        protected void MyRoutineToCall(Object state)
+        {
+            Odswiez();
         }
     }
 }

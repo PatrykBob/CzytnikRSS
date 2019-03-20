@@ -17,8 +17,6 @@ namespace CzytnikRSS.Controllers
         public WebServiceSoapClient rssService = new RssService.WebServiceSoapClient();
         public ActionResult Index()
         {
-            rssService.Odswiez();
-
             List<Source> linki = rssService.PobierzLinkiZBazy().ToList();
 
             return View(linki);

@@ -53,7 +53,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="pubDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="pubDate" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="link" type="s:string" />
         </s:sequence>
       </s:complexType>

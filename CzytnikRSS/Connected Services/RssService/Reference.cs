@@ -90,7 +90,8 @@ namespace CzytnikRSS.RssService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string descriptionField;
         
-        private System.DateTime pubDateField;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string pubDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string linkField;
@@ -144,13 +145,13 @@ namespace CzytnikRSS.RssService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
-        public System.DateTime pubDate {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string pubDate {
             get {
                 return this.pubDateField;
             }
             set {
-                if ((this.pubDateField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.pubDateField, value) != true)) {
                     this.pubDateField = value;
                     this.RaisePropertyChanged("pubDate");
                 }
