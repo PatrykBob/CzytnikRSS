@@ -1,7 +1,5 @@
-﻿
-@{
-    ViewBag.Title = "PokazStrony";
-}
+﻿@model List<CzytnikRSS.RssService.RssItem>
+
 
 <div class="main">
     <div class="modal-title">
@@ -25,70 +23,72 @@
 </div>
 
 
-    <style>
-        .h3 {
-            color: rgba(0,0,20,0.8);
-            font-size: 30px;
-            font-family: 'Signika', sans-serif;
-            padding-bottom: 10px;
-            text-decoration: underline;
-        }
-        .h4 {
-            color:black;
-        }
-        .main {
-            background-image: url('../../obrazki/background-08.jpg');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            height: 100%;
-            padding-top: 40px;
-            padding-bottom: 0px;
-            padding-left: 100px;
-            padding-right: 100px;
-        }
+<style>
+    .h3 {
+        color: rgba(0,0,20,0.8);
+        font-size: 30px;
+        font-family: 'Signika', sans-serif;
+        padding-bottom: 10px;
+        text-decoration: underline;
+    }
 
-        .tekst {
-            color: black;
-        }
+    .h4 {
+        color: black;
+    }
 
-        .col-xs-6 {
-            font-size: 22px;
-            text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
-        }
+    .main {
+        background-image: url('../../obrazki/background-08.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        height: 100%;
+        padding-top: 40px;
+        padding-bottom: 0px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
 
-        .modal-title {
-            text-align: center;
-        }
+    .tekst {
+        color: black;
+    }
 
-        .h1 {
-            font-size: 36px;
-            color: rgba(0,0,0,0.6);
-            text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
-        }
+    .col-xs-6 {
+        font-size: 22px;
+        text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+    }
 
-        .row {
-            text-align: center;
-        }
+    .modal-title {
+        text-align: center;
+    }
 
-        .hr {
-            overflow: visible;
+    .h1 {
+        font-size: 36px;
+        color: rgba(0,0,0,0.6);
+        text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+    }
+
+    .row {
+        text-align: center;
+    }
+
+    .hr {
+        overflow: visible;
+        height: 30px;
+        border-style: solid;
+        border-color: white;
+        border-width: 1px 0 0 0;
+        border-radius: 20px;
+    }
+
+        .hr:before {
+            display: block;
+            content: "";
             height: 30px;
+            margin-top: -31px;
             border-style: solid;
             border-color: white;
-            border-width: 1px 0 0 0;
+            border-width: 0 0 1px 0;
             border-radius: 20px;
         }
-
-            .hr:before {
-                display: block;
-                content: "";
-                height: 30px;
-                margin-top: -31px;
-                border-style: solid;
-                border-color: white;
-                border-width: 0 0 1px 0;
-                border-radius: 20px;
-            }
-    </style>
+</style>
 
 

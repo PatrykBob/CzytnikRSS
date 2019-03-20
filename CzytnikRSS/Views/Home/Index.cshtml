@@ -1,4 +1,4 @@
-﻿@model List<CzytnikRSS.Models.Source>
+﻿@model List<CzytnikRSS.RssService.Source>
 
 @{
     ViewBag.Title = "Home Page";
@@ -11,7 +11,7 @@
     <hr class="hr" />
     <div class="container-fluid">
         <div class="row">
-            @foreach (var Strona in Model)
+            @foreach (var Strona in Model.ToList())
             {
                 <div class="col-xs-6">
                     <p class="text">

@@ -1,4 +1,5 @@
-﻿using CzytnikRSS.Models;
+﻿
+using CzytnikRSS.RssService;
 using HtmlAgilityPack;
 using LiteDB;
 using System;
@@ -13,44 +14,28 @@ namespace CzytnikRSS.Controllers
 {
     public class HomeController : Controller
     {
-        DatabaseController dbController = new DatabaseController();
+        public WebServiceSoapClient rssService = new RssService.WebServiceSoapClient();
         public ActionResult Index()
         {
-            List<Site> lista = new List<Site>();
+            //List<RssItem> lista = new List<RssItem>();
 
-            PobierzLinkiStron();
+            //PobierzLinkiStron();
 
-            List<Source> linki = dbController.PobierzLinkiZBazy();
+            rssService.Odswiez();
 
-            foreach (Source link in linki)
+            List<Source> linki = rssService.PobierzLinkiZBazy().ToList();//dbController.PobierzLinkiZBazy();
+
+            /*foreach (Source link in linki)
             {
                 PobierzElementyZeStrony(link.link);
-            }
+            }*/
 
-            //Pobieranie z bazy i wrzucanie do widoku/indexu
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).ToString() + "/dane.db";
-            using (var db = new LiteDatabase(path))
-            {
-                var col = db.GetCollection<Source>("links");
-
-                var query = col.FindAll().Select(item =>
-                        new Source
-                        {
-                            id = item.id,
-                            link = item.link
-                        });
-                var items = query.ToList();
-
-                return View(items);
-            }
-
-
-            //return View();
+            return View(linki);
         }
 
         public ActionResult PokazStrony(string link)
         {
-            return (View(dbController.PobierzStronyWgLinku(link)));
+            return View(rssService.PobierzStronyWgLinku(link).ToList()); //dbController.PobierzStronyWgLinku(link)));
         }
 
         public void PobierzLinkiStron()
@@ -76,7 +61,7 @@ namespace CzytnikRSS.Controllers
                             {
                                 link = lin.Attributes["href"].Value
                             };
-                            dbController.ZapiszLinkDoBazy(l);
+                            //dbController.ZapiszLinkDoBazy(l);
                         }
                     }
                 }
@@ -117,14 +102,14 @@ namespace CzytnikRSS.Controllers
                     XElement rss = XElement.Load(link);
                     foreach (var item in rss.Descendants("item"))
                     {
-                        var site = new Site
+                        var site = new RssItem
                         {
                             title = item.Element("title").Value,
                             description = item.Element("description").Value,
                             pubDate = DateTime.Now,
                             link = link
                         };
-                        dbController.ZapiszStroneDoBazy(site);
+                        //dbController.ZapiszStroneDoBazy(site);
                     }
                 }
                 catch (Exception e)

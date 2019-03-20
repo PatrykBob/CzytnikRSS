@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Odswiez">
+        <s:complexType />
+      </s:element>
+      <s:element name="OdswiezResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="PobierzLinkiZBazy">
+        <s:complexType />
+      </s:element>
+      <s:element name="PobierzLinkiZBazyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PobierzLinkiZBazyResult" type="tns:ArrayOfSource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Source" nillable="true" type="tns:Source" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Source">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="link" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="PobierzStronyWgLinku">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="link" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PobierzStronyWgLinkuResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PobierzStronyWgLinkuResult" type="tns:ArrayOfRssItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfRssItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RssItem" nillable="true" type="tns:RssItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RssItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="pubDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="link" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="OdswiezSoapIn">
+    <wsdl:part name="parameters" element="tns:Odswiez" />
+  </wsdl:message>
+  <wsdl:message name="OdswiezSoapOut">
+    <wsdl:part name="parameters" element="tns:OdswiezResponse" />
+  </wsdl:message>
+  <wsdl:message name="PobierzLinkiZBazySoapIn">
+    <wsdl:part name="parameters" element="tns:PobierzLinkiZBazy" />
+  </wsdl:message>
+  <wsdl:message name="PobierzLinkiZBazySoapOut">
+    <wsdl:part name="parameters" element="tns:PobierzLinkiZBazyResponse" />
+  </wsdl:message>
+  <wsdl:message name="PobierzStronyWgLinkuSoapIn">
+    <wsdl:part name="parameters" element="tns:PobierzStronyWgLinku" />
+  </wsdl:message>
+  <wsdl:message name="PobierzStronyWgLinkuSoapOut">
+    <wsdl:part name="parameters" element="tns:PobierzStronyWgLinkuResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSoap">
+    <wsdl:operation name="Odswiez">
+      <wsdl:input message="tns:OdswiezSoapIn" />
+      <wsdl:output message="tns:OdswiezSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PobierzLinkiZBazy">
+      <wsdl:input message="tns:PobierzLinkiZBazySoapIn" />
+      <wsdl:output message="tns:PobierzLinkiZBazySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PobierzStronyWgLinku">
+      <wsdl:input message="tns:PobierzStronyWgLinkuSoapIn" />
+      <wsdl:output message="tns:PobierzStronyWgLinkuSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Odswiez">
+      <soap:operation soapAction="http://tempuri.org/Odswiez" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PobierzLinkiZBazy">
+      <soap:operation soapAction="http://tempuri.org/PobierzLinkiZBazy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PobierzStronyWgLinku">
+      <soap:operation soapAction="http://tempuri.org/PobierzStronyWgLinku" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Odswiez">
+      <soap12:operation soapAction="http://tempuri.org/Odswiez" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PobierzLinkiZBazy">
+      <soap12:operation soapAction="http://tempuri.org/PobierzLinkiZBazy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PobierzStronyWgLinku">
+      <soap12:operation soapAction="http://tempuri.org/PobierzStronyWgLinku" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService">
+    <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
+      <soap:address location="http://localhost:50833/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
+      <soap12:address location="http://localhost:50833/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
