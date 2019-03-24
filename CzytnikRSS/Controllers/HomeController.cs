@@ -1,5 +1,4 @@
-﻿
-using CzytnikRSS.RssService;
+﻿using CzytnikRSS.RssService;
 using HtmlAgilityPack;
 using LiteDB;
 using System;
